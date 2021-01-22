@@ -1,0 +1,3 @@
+http > :contact
+
+:contact > gemfire --connect-type=locator --host-addresses=gemfire1-locator:10334 --key-expression=payload.id --json=true --region-name=Contacts

@@ -1,0 +1,17 @@
+apiVersion: sql.tanzu.vmware.com/v1
+kind: Postgres
+metadata:
+  name: pg-instance-example
+spec:
+  memory: 800Mi
+  cpu: "0.8"
+  storageClassName: thin-csi
+  storageSize: 100M
+  pgConfig:
+    dbname: contact-db
+    username: pgadmin
+  serviceType: ClusterIP
+  highAvailability:
+    enabled: false
+  # backupLocationSecret:
+  #   name: s3-secret-example

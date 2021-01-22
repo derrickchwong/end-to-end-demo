@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2020-12-08T04:20:39Z"
+  labels:
+    app: gemfire1-locator
+  name: gemfire1-locator
+  namespace: test-gf
+  ownerReferences:
+    - apiVersion: gemfire.tanzu.vmware.com/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: GemFireCluster
+      name: gemfire1
+      uid: 6d249ab2-d6d9-4788-979f-92b002ef5f79
+  resourceVersion: "81537468"
+  selfLink: /api/v1/namespaces/test-gf/services/gemfire1-locator
+  uid: 7a7c9240-00b5-4a1c-a23a-541149959eb7
+spec:
+  clusterIP: None
+  ports:
+    - name: management
+      port: 7070
+      protocol: TCP
+      targetPort: 7070
+    - name: locator
+      port: 10334
+      protocol: TCP
+      targetPort: 10334
+    - name: locator-metrics
+      port: 4321
+      protocol: TCP
+      targetPort: 4321
+  publishNotReadyAddresses: true
+  selector:
+    app: gemfire1-locator
+  sessionAffinity: None
+  type: ClusterIP

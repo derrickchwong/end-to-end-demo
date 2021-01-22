@@ -1,0 +1,12 @@
+kubectl get secret pg-instance-example-db-secret -o jsonpath='{.data.username}' | base64 -D
+kubectl get secret pg-instance-example-db-secret -o jsonpath='{.data.password}' | base64 -D
+
+connect --url=http://localhost:7070/geode-mgmt/v1
+
+create region --name=Contacts --type=PARTITION_REDUNDANT
+
+deploy --jar=/Users/wderrick/Downloads/postgresql-42.2.18.jar
+
+create data-source --url=jdbc:postgresql://pg-instance-example:5432/contact-db --name=postgresdb1 --username=pgadmin --password=XfzVkf5TizI46v7gMNxyYuG63gMTaz --jdbc-driver-class=org.postgresql.Driver
+
+create jdbc-mapping --region=Contacts --data-source=postgresdb1 --table=Contacts --pdx-name="com.example.demogemfireclient.Contact" --pdx-class-file=/Users/wderrick/Downloads/demo-gemfire-client/target/classes/com/example/demogemfireclient/Contact.class
