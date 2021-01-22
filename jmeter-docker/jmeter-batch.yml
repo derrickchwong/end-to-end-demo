@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jmeter
+spec:
+  template:
+    spec:
+      containers:
+      - name: jmeter
+        image: derrickchwong/jmeter-amqp:0.0.2
+        command: ["jmeter",  "-n", "-t", "/data/jmeter-k8s-500pm.jmx"]
+        volumeMounts:
+        - name: jmeter-file-volume
+          mountPath: /data
+      volumes:
+      - name: jmeter-file-volume
+        configMap:
+          name: jmeter-file-500pm
+      restartPolicy: Never
+  backoffLimit: 4
